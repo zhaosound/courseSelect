@@ -1,0 +1,4 @@
+student.name.label: '姓名'
+label.student.email: '邮箱'
+label.student.password: '密码'
+label.student.repassword: '重新输入密码'

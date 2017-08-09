@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+<div class="row">
+    <form action="{{ path('login') }}" method="post" class="form-horizontal">
+        <div class="row">
+            {% if error %}
+            <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData,'security') }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="text" id="student_username" name="_username" class="form-control" value="{{ last_username }}" placeholder="Please enter username"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="password" id="password" name="_password" class="form-control" placeholder="Please enter password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="checkbox" id="remember_me" name="_remember_me" checked />
+                <label for="remember_me">Remember me.</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">login</button>
+        </div>
+        <div class="toregister">
+            <a href="{{ path('student_register') }}">No account? Then click to register!</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

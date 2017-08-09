@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+    {{ form_start(form) }}
+    <div>
+        <div>
+            <h3>课程名称</h3>
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div>
+            <h3>课程简介</h3>
+            {{ form_widget(form.summary) }}
+            {{ form_errors(form.summary) }}
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary margin-top">保存</button>
+        </div>
+        <div class="margin-top">
+            <a href="{{ path('admin_subject') }}">放弃添加,返回</a>
+        </div>
+
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

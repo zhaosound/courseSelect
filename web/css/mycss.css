@@ -1,0 +1,44 @@
+.margin-top{
+    margin-top: 30px;
+}
+.right-div{
+    position: relative;
+    left: 44%;
+}
+.head-pic{
+    width:70px;
+    height:70px;
+    border-radius:70px;
+    position: absolute;
+    margin-top: -30px;
+    margin-left: -30%;
+}
+.pic{
+    width:150px;
+    height: 150px;
+    display: inline-block;
+    border-radius: 150px;
+}
+._block{
+    display: inline-block;
+    padding-top: 50px;
+    padding-left: 100px;
+}
+.top-50{
+    padding-top: 50px;
+}
+.text-left{
+    text-align: left;
+}
+#address-ul li{
+    list-style-type: none;
+}
+/*#address-ul input{*/
+    /*width:40%;*/
+    /*display: inline-block;*/
+/*}*/
+.a-add{
+    position: relative;
+    margin-right: 3%;
+    margin-top: 3%;
+}

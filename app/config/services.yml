@@ -1,0 +1,22 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+    student.class: AppBundle\Entity\Student
+    pic_directory: %kernel.root_dir%/../web/uploads/pics
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    registration_manager:
+        class: AppBundle\Manager\RegistrationManager
+        arguments: ["@security.encoder_factory", "@security.password_encoder", "@doctrine.orm.entity_manager", "%student.class%"]
+
+    mail_manager:
+        class: AppBundle\Manager\MailManager
+        arguments: ["@mailer"]
+
+    upload_manager:
+        class: AppBundle\Manager\FileUploaderManager
+        arguments: ["%pic_directory%"]

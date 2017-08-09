@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+
+{{ form_start(form) }}
+    <h3>地址清单</h3>
+    <ul id="address-ul" data-prototype="{{ form_widget(form.addresses.vars.prototype)|e }}">
+        {% for address in form.addresses %}
+            <li>
+                {{ form_row(address.name) }}
+                {{ form_row(address.detail) }}
+                <a href="#" class="remove-address">删除</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <button type="submit" class="btn btn-primary">提交</button>
+{{ form_end(form)}}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var addLink = $('<a href="#" class="a-add btn">新增地址</a>');
+        var newLi   = $('<li></li>').append(addLink);
+
+        $(document).ready(function() {
+            var ulHolder = $('#address-ul');
+            ulHolder.append(newLi);
+            ulHolder.data('index', ulHolder.find(':input').length);
+            addLink.on('click', function(e) {
+                e.preventDefault();
+                addAddressForm(ulHolder, newLi);
+            });
+        });
+
+        function addAddressForm(ulHolder, newLi) {
+            var prototype = ulHolder.data('prototype');
+            var index     = ulHolder.data('index');
+            var newForm   = prototype.replace(/__name__/g, index);
+            ulHolder.data('index', index+1);
+
+            var newFormLi = $('<li></li>').append(newForm);
+            newFormLi.append('<a href="#" class="remove-address">删除</a>');
+            newLi.before(newFormLi);
+
+            $('.remove-address').click(function(e) {
+                e.preventDefault();
+                $(this).parent().remove();
+                return false;
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block form_widget_simple %}
+    {% set type = type|default('hidden') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock form_widget_simple %}
+
+{% block email_widget %}
+    {% set type = type|default('hidden') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock email_widget %}
+
+{% block password_widget %}
+    {% set type = type|default('hidden') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock password_widget %}
+
+{% block container %}
+    <div class="row">
+        {{ form_start(form, {'attr':{'class':'form-horizontal', 'novalidate': 'novalidate'}}) }}
+        <h3>您的注册信息如下</h3>
+        <table class="table table-bordered">
+            <tr>
+                <td>用户名</td>
+                <td>{{ form.vars.data.username }}</td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td>{{ form.vars.data.email }}</td>
+            </tr>
+        </table>
+        <div>
+            {{ form_widget(form.username) }}
+            {{ form_widget(form.email) }}
+            {{ form_widget(form.password.first, { value: form.vars.data.password }) }}
+            {{ form_widget(form.password.second, { value: form.vars.data.password } ) }}
+        </div>
+        <div class="form-group">
+            <button type="submit" name="back" value="1" class="btn btn-primary">返回</button>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="row">
+        {{ form_start(form, {'attr':{'class':'form-horizontal', 'novalidate': 'novalidate'}}) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        <div class="form-group">
+            <button type="submit" name="confirm" value="1" class="btn btn-primary">提交</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

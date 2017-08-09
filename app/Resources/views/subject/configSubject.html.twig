@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <h3>课程信息一览</h3>
+    <div class="right-div">
+            <a href="{{ path('new_subject') }}" class="btn">添加课程</a>
+            <a href="{{ path('show') }}" class="btn">用户一览</a>
+    </div>
+
+    <table class="table table-striped">
+           <tr>
+               <th class="text-center h4">课程名称</th>
+               <th class="text-center h4">课程简介</th>
+               <th class="text-center h4">操作</th>
+           </tr>
+    {% for subject in pagination %}
+            <tr>
+                <td class="subjectnametd">
+                    {{ subject.name }}
+                </td>
+                <td class="subjectsummtd">
+                    {{ subject.summary }}
+                </td>
+                <td class="subjectedittd">
+                    <a href="{{ path("edit_subject",{'subject':subject.name}) }}">EDIT</a>
+                </td>
+            </tr>
+    {% endfor %}
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+
+{%- block checkbox_widget -%}
+    <td> {#checkbox#}
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    </td>
+    <td> {#name#}
+        {{ (label|split('|',2))[0] }}
+    </td>
+    <td>
+        {{ (label|split('|',2))[1] }}
+    </td>
+{%- endblock checkbox_widget -%}
+
+{% block container %}
+    {{ form_start(form) }}
+    <div>
+        <div>
+            <img src="{{ vich_uploader_asset(student, 'picFile') }}" alt="上传头像" class="head-pic">
+            <span class="h3">选课情况(打钩为已选课程)</span>
+        </div>
+
+        <div class="right-div">
+            <a href="{{ path('add_image') }}" class="btn">修改头像</a>
+            <a href="{{ path('modify_address') }}" class="btn">完善地址</a>
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th  class="text-center h4">选择</th>
+                <th  class="text-center h4">课程</th>
+                <th  class="text-center h4">简介</th>
+            </tr>
+            {% for subject in form.subjects %}
+                <tr>
+                    {{ form_widget(subject)}}
+                </tr>
+            {% endfor %}
+        </table>
+        <button type="submit" class="btn btn-primary" >提交</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

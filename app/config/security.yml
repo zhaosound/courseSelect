@@ -1,0 +1,80 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        AppBundle\Entity\Student:
+            algorithm: bcrypt
+        AppBundle\Entity\Teacher: plaintext
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        student_database:
+            entity:
+                class: AppBundle:Student
+        teacher_database:
+            entity:
+                class: AppBundle:Teacher
+                property: username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js|output)/
+#            pattern: ^/(_(profiler)|css|images|js|output)/
+            security: false
+
+        teacher_secured_area:
+                pattern: ^/admin
+                anonymous: ~
+                provider: teacher_database
+
+                form_login:
+                    login_path: /admin/login
+                    check_path: /admin/login
+                    failure_path: /admin/login
+                    default_target_path: /admin/subject
+                logout:
+                    path:   /admin/logout
+                    target: /admin/login
+
+                remember_me:
+                    secret: '%secret%'
+                    lifetime: 604800 #one week
+                    path: /
+
+
+        student_secured_area:
+            pattern: ^/
+            anonymous: ~
+            provider: student_database
+
+            form_login:
+                login_path: /login
+                check_path: /login
+                failure_path: /login
+                default_target_path: /
+
+            logout:
+                path:   /logout
+                target: /
+
+            remember_me:
+                secret: '%secret%'
+                lifetime: 604800 #one week
+                path: /
+
+
+
+
+    access_control:
+        #登录,注册,发邮件不需要认证
+        #admin相关需要admin权限
+        #其他需要role_user权限
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/mail, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/active/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/ ,roles: ROLE_USER }
+
+
+

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+    {{ form_start(form) }}
+
+    <div class="editcont">
+
+        <div >
+            <h3>课程名称</h3>
+            {{ form_widget(form.name) }}
+        </div>
+
+        <div class="editsummary">
+            <h3>课程简介</h3>
+            {{ form_widget(form.summary) }}
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary margin-top">保存</button>
+        </div>
+        <div>
+            <a href="{{ path('delete_subject',{'subject': form.vars.data.name }) }}"
+               onclick="if(confirm('删除不可恢复,仍要删除?')==false) return false"
+               class="margin-top">删除课程</a>
+        </div>
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

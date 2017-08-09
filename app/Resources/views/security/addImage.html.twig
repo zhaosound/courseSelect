@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+
+    {{ form_start(form)}}
+    <div>
+        <img src="{{ vich_uploader_asset(app.user, 'picFile') }}" alt="上传头像" class="pic">
+    </div>
+    <div class="_block">
+        {{ form_widget(form.picFile) }}
+    </div>
+    <div class="top-50">
+        <button type="submit" class="btn btn-primary">提交</button>
+    </div>
+    {{ form_end(form)}}
+
+{% endblock %}
